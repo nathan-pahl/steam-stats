@@ -1,0 +1,9 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+  <mat-form-field>
+    <input type="text" name="input" placeholder="Profile Name or Steam ID" ngModel required matInput>
+  </mat-form-field>
+  <button mat-raised-button>Enter</button>
+</form>
+<app-search-results *ngIf="games && games.length" [games]="games"></app-search-results>
+<h4 *ngIf="games && games.length === 0">Steam user has no games :(</h4>
+<h4 *ngIf="errorMessage">{{errorMessage}}</h4>

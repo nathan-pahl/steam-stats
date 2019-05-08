@@ -1,0 +1,16 @@
+<div>
+  <h4>Library Size: {{games.length}}</h4>
+  <table matSort (matSortChange)="sortGames($event)">
+    <tr>
+      <th mat-sort-header="name">Name</th>
+      <th mat-sort-header="time">Time</th>
+    </tr>
+    <tr *ngFor="let game of sortedGames">
+      <td class="name-data">
+        <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{game.appid}}/{{game.img_icon_url}}.jpg">
+        <span>{{game.name}}</span>
+      </td>
+      <td>{{game.playtime_forever | time}}</td>
+    </tr>
+  </table>
+</div>
