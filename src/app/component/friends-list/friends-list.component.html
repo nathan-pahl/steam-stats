@@ -1,0 +1,15 @@
+<div>
+  <h4>Friends List Size: {{friends.length}}</h4>
+  <table matSort (matSortChange)="sortFriends($event)">
+    <tr>
+      <th mat-sort-header="name">Name</th>
+      <th mat-sort-header="time">Time</th>
+    </tr>
+    <tr *ngFor="let friend of sortedFriends">
+      <td class="name-data">
+        <span>{{friend.name}}</span>
+      </td>
+      <td>{{friend.playtime_forever | time}}</td>
+    </tr>
+  </table>
+</div>

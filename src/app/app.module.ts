@@ -11,13 +11,15 @@ import { AppComponent } from './app.component';
 import { SearchComponent } from './component/search/search.component';
 import { SearchResultsComponent } from './component/search-results/search-results.component';
 import { TimePipe } from './filter/time.pipe';
+import { FriendsListComponent } from './component/friends-list/friends-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
     SearchResultsComponent,
-    TimePipe
+    TimePipe,
+    FriendsListComponent
   ],
   imports: [
     BrowserAnimationsModule,
