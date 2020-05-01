@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Friend } from 'src/app/class/friend';
 import { Sort } from '@angular/material/sort';
+import { FriendSummary } from 'src/app/class/friend-summary';
 
 @Component({
   selector: 'app-friends-list',
@@ -9,8 +10,8 @@ import { Sort } from '@angular/material/sort';
 })
 export class FriendsListComponent implements OnInit {
 
-  @Input() friends: Friend[];
-  sortedFriends: Friend[];
+  @Input() friends: FriendSummary[];
+  sortedFriends: FriendSummary[];
 
   constructor() { }
 
@@ -28,7 +29,7 @@ export class FriendsListComponent implements OnInit {
     this.sortedFriends = friends.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        // case 'name': return compare(a.name, b.name, isAsc);
+        case 'name': return compare(a.player.personaname, b.player.personaname, isAsc);
         // case 'time': return compare(a.playtime_forever, b.playtime_forever, isAsc);
         default: return 0;
       }

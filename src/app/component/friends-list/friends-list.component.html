@@ -3,13 +3,11 @@
   <table matSort (matSortChange)="sortFriends($event)">
     <tr>
       <th mat-sort-header="name">Name</th>
-      <th mat-sort-header="time">Time</th>
     </tr>
     <tr *ngFor="let friend of sortedFriends">
       <td class="name-data">
-        <span>{{friend.name}}</span>
+        <span>{{friend.player.personaname}}</span>
       </td>
-      <td>{{friend.playtime_forever | time}}</td>
     </tr>
   </table>
 </div>

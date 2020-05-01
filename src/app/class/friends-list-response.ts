@@ -1,8 +1,8 @@
-import { Friend } from './friend';
+import { FriendSummary } from './friend-summary';
 
 export class FriendsListResponse {
 
     count: number;
-    friends: Friend[];
+    friends: FriendSummary[];
 
 }

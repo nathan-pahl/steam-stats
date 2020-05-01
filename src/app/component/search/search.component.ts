@@ -5,6 +5,7 @@ import { FriendsListResponse } from 'src/app/class/friends-list-response';
 import { Game } from 'src/app/class/game';
 import { OwnedGamesResponse } from 'src/app/class/owned-games-response';
 import { PlayerService } from '../../service/player.service';
+import { FriendSummary } from 'src/app/class/friend-summary';
 
 @Component({
   selector: 'app-search',
@@ -14,7 +15,7 @@ import { PlayerService } from '../../service/player.service';
 export class SearchComponent {
 
   protected games: Game[];
-  protected friends: Friend[];
+  protected friends: FriendSummary[];
   private errorMessage: string;
 
   constructor(private playerService: PlayerService) { }
