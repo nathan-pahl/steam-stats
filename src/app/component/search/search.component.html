@@ -4,7 +4,9 @@
   </mat-form-field>
   <button mat-raised-button>Enter</button>
 </form>
-<app-friends-list *ngIf="friends && friends.length" [friends]="friends"></app-friends-list>
-<app-search-results *ngIf="games && games.length" [games]="games"></app-search-results>
+<div class="results">
+  <app-friends-list *ngIf="friends && friends.length" [friends]="friends"></app-friends-list>
+  <app-search-results *ngIf="games && games.length" [games]="games"></app-search-results>
+</div>
 <h4 *ngIf="games && games.length === 0">Steam user has no games :(</h4>
 <h4 *ngIf="errorMessage">{{errorMessage}}</h4>

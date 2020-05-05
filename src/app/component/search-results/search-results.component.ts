@@ -6,7 +6,7 @@ import { Game } from 'src/app/class/game';
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.css']
+  styleUrls: ['./search-results.component.less']
 })
 export class SearchResultsComponent implements OnInit {
 

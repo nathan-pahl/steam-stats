@@ -10,7 +10,7 @@ import { FriendSummary } from 'src/app/class/friend-summary';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.less']
 })
 export class SearchComponent {
 
@@ -22,6 +22,7 @@ export class SearchComponent {
 
   onSubmit(f: NgForm) {
     this.games = undefined;
+    this.friends = undefined;
     this.errorMessage = undefined;
     this.playerService.getOwnedGames(f.value.input).subscribe((response: OwnedGamesResponse) => {
       this.games = response.games;

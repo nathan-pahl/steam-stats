@@ -1,10 +1,11 @@
 {
   "name": "steam-stats",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "buildProd": "ng build --prod --base-href /steam-stats/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
