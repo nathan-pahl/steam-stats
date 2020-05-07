@@ -5,6 +5,8 @@ import { FriendSummary } from 'src/app/class/friend-summary';
 import { Player } from 'src/app/class/player';
 import { PlayerService } from 'src/app/service/player.service';
 import { OwnedGamesResponse } from 'src/app/class/owned-games-response';
+import { FriendService } from 'src/app/service/friend.service';
+import { GamelistService } from 'src/app/service/gamelist.service';
 
 @Component({
   selector: 'app-friends-list',
@@ -16,10 +18,7 @@ export class FriendsListComponent implements OnInit {
   @Input() friends: FriendSummary[];
   sortedFriends: FriendSummary[];
 
-  playerService: PlayerService;
-
-  constructor(playerService: PlayerService) {
-    this.playerService = playerService;
+  constructor(private playerService: PlayerService, private friendService: FriendService, private gamelistService: GamelistService) {
   }
 
   ngOnInit() {
@@ -44,9 +43,10 @@ export class FriendsListComponent implements OnInit {
   }
 
   search(player: Player) {
-    console.log({player});
+    this.friendService.setPlayer(player);
     this.playerService.getOwnedGames(player.steamid).subscribe((response: OwnedGamesResponse) => {
       console.log(response.games.length);
+      this.gamelistService.setGameList(response.games);
     }, (error) => {
       console.log("Error getting games", error);
     })

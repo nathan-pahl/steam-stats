@@ -6,6 +6,7 @@ import { Game } from 'src/app/class/game';
 import { OwnedGamesResponse } from 'src/app/class/owned-games-response';
 import { PlayerService } from '../../service/player.service';
 import { FriendSummary } from 'src/app/class/friend-summary';
+import { GamelistService } from 'src/app/service/gamelist.service';
 
 @Component({
   selector: 'app-search',
@@ -16,9 +17,14 @@ export class SearchComponent {
 
   protected games: Game[];
   protected friends: FriendSummary[];
+  public gameList: Game[];
   private errorMessage: string;
 
-  constructor(private playerService: PlayerService) { }
+  constructor(private playerService: PlayerService, private gamelistService: GamelistService) {
+    this.gamelistService.gameListChange.subscribe((gameList: Game[]) => {
+      this.gameList = gameList;
+    });
+  }
 
   onSubmit(f: NgForm) {
     this.games = undefined;
@@ -35,4 +41,5 @@ export class SearchComponent {
       this.errorMessage = error.error.message;
     });
   }
+
 }
