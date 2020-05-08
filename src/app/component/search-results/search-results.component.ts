@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, SimpleChange, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, SimpleChange, OnChanges, SimpleChanges } from '@angular/core';
 import { Sort } from '@angular/material';
 import { PlayerService } from 'src/app/service/player.service';
 import { Game } from 'src/app/class/game';
@@ -12,6 +12,7 @@ export class SearchResultsComponent implements OnInit {
 
   @Input() games: Game[];
   sortedGames: Game[];
+  sortMethod: Sort;
 
   constructor(private playerService: PlayerService) { }
 
@@ -19,21 +20,31 @@ export class SearchResultsComponent implements OnInit {
     this.sortedGames = this.games.slice();
   }
 
-  sortGames(sort: Sort) {
+  ngOnChanges(changes: SimpleChanges) {
+    this.games = changes.games.currentValue;
+    this.sortedGames = this.games.slice();
+    this.sortGames();
+  }
+
+  sortGames() {
     const games = this.games.slice();
-    if (!sort.active || sort.direction === '') {
+    if (!this.sortMethod || !this.sortMethod.active || this.sortMethod.direction === '') {
       this.sortedGames = games;
       return;
     }
 
     this.sortedGames = games.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
+      const isAsc = this.sortMethod.direction === 'asc';
+      switch (this.sortMethod.active) {
         case 'name': return compare(a.name, b.name, isAsc);
         case 'time': return compare(a.playtime_forever, b.playtime_forever, isAsc);
         default: return 0;
       }
     });
+  }
+
+  setSortMethod(sortMethod: Sort) {
+    this.sortMethod = sortMethod;
   }
 }
 
