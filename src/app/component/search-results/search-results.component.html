@@ -1,6 +1,6 @@
 <div>
   <h4>Library Size: {{games.length}}</h4>
-  <table matSort [matSortStart]="'desc'" (matSortChange)="setSortMethod($event);sortGames($event);">
+  <table matSort [matSortStart]="'desc'" (matSortChange)="setSortMethod($event);sortGames();">
     <tr>
       <th mat-sort-header="name">Name</th>
       <th mat-sort-header="time">Time</th>

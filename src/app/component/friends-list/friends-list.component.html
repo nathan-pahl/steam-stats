@@ -4,11 +4,13 @@
     <tr>
       <th mat-sort-header="name">Name</th>
     </tr>
-    <tr *ngFor="let friend of sortedFriends">
-      <td class="name-data">
+    <tr class="friend-row" *ngFor="let friend of sortedFriends">
+      <td class="friend-data">
         <span>{{friend.player.personaname}}</span>
-        <button mat-raised-button (click)="search(friend.player);">S</button>
-        <button mat-raised-button (click)="compare(friend.player);">C</button>
+        <div>
+          <button mat-raised-button (click)="search(friend.player);">S</button>
+          <button mat-raised-button (click)="compare(friend.player);">C</button>
+        </div>
       </td>
     </tr>
   </table>
