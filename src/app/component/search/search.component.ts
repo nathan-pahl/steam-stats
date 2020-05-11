@@ -7,6 +7,7 @@ import { OwnedGamesResponse } from 'src/app/class/owned-games-response';
 import { PlayerService } from '../../service/player.service';
 import { FriendSummary } from 'src/app/class/friend-summary';
 import { GamelistService } from 'src/app/service/gamelist.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-search',
@@ -20,7 +21,11 @@ export class SearchComponent {
   public gameList: Game[];
   private errorMessage: string;
 
-  constructor(private playerService: PlayerService, private gamelistService: GamelistService) {
+  constructor(private playerService: PlayerService, private gamelistService: GamelistService, private userService: UserService) {
+    this.userService = userService;
+    this.gamelistService.mainGameListChange.subscribe((gameList: Game[]) => {
+      this.games = gameList;
+    });
     this.gamelistService.gameListChange.subscribe((gameList: Game[]) => {
       this.gameList = gameList;
     });
@@ -30,6 +35,12 @@ export class SearchComponent {
     this.games = undefined;
     this.friends = undefined;
     this.errorMessage = undefined;
+    this.playerService.getPlayerSummary(f.value.input).subscribe((response: FriendsListResponse) => {
+      this.userService.setPlayer(response.friends[0].player);
+      this.userService.setFriend(response.friends[0].friend);
+    }, error => {
+      this.errorMessage = error.error.message;
+    });
     this.playerService.getOwnedGames(f.value.input).subscribe((response: OwnedGamesResponse) => {
       this.games = response.games;
     }, error => {

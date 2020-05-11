@@ -11,14 +11,23 @@ import { Friend } from '../class/friend';
 })
 export class PlayerService {
 
+  private getPlayerSummaryUrl: string;
   private getGamesUrl: string;
   private getFriendsUrl: string;
   private games: Game[];
   private friends: Friend[];
 
   constructor(private http: HttpClient) {
+    this.getPlayerSummaryUrl = "http://localhost:8080/getPlayerSummary";
     this.getGamesUrl = "http://localhost:8080/getGames";
     this.getFriendsUrl = "http://localhost:8080/getFriends";
+  }
+
+  public getPlayerSummary(input: string): Observable<FriendsListResponse> {
+    let params = new HttpParams().set('input', input);
+    return this.http.get<FriendsListResponse>(this.getPlayerSummaryUrl, {
+      params: params
+    });
   }
 
   public getOwnedGames(input: string): Observable<OwnedGamesResponse> {

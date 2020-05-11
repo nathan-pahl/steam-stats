@@ -1,24 +1,31 @@
+:host {
+    background-color: rgba(169, 0, 128, 0.25);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    box-shadow: 5px 5px 4px 0px rgba(169, 0, 128, 0.5);
 
-.friend-row {
-    background-color: rgba(234, 234, 234, 0.5);
+    .friend-row {
+        background-color: rgba(234, 234, 234, 0.5);
 
-    &:nth-child(even) {
-        background-color: rgba(191, 191, 191, 0.5);
-    }
+        &:nth-child(even) {
+            background-color: rgba(191, 191, 191, 0.5);
+        }
 
-    &:hover {
-        background-color: rgba(240, 248, 255, 0.5);
-    }
+        &:hover {
+            background-color: rgba(240, 248, 255, 0.5);
+        }
 
-    .friend-data {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 300px;
-        padding: 3px;
-    }
-    
-    .friend-data:nth-child(even) {
-        background-color: #fafafa
+        .friend-data {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 300px;
+            padding: 3px;
+        }
+        
+        .friend-data:nth-child(even) {
+            background-color: #fafafa
+        }
     }
 }

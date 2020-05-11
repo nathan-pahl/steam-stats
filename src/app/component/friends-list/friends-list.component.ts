@@ -49,11 +49,29 @@ export class FriendsListComponent implements OnInit {
       this.gamelistService.setGameList(response.games);
     }, (error) => {
       console.log("Error getting games", error);
-    })
+    });
   }
 
-  compare(player: Player) {
-    console.log({player});
+  async compare(player: Player) {
+    this.friendService.setPlayer(player);
+    let mainGames = [];
+    let friendGames = [];
+
+    await this.playerService.getOwnedGames(player.steamid).subscribe((response: OwnedGamesResponse) => {
+      console.log(response.games.length);
+      this.gamelistService.setGameList(response.games);
+      mainGames = response.games.slice();
+    }, (error) => {
+      console.log("Error getting games", error);
+    });
+
+    await this.playerService.getOwnedGames(player.steamid).subscribe((response: OwnedGamesResponse) => {
+      console.log(response.games.length);
+      this.gamelistService.setGameList(response.games);
+      friendGames = response.games.slice();
+    }, (error) => {
+      console.log("Error getting games", error);
+    });
   }
 }
 
