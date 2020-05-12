@@ -7,6 +7,8 @@ import { PlayerService } from 'src/app/service/player.service';
 import { OwnedGamesResponse } from 'src/app/class/owned-games-response';
 import { FriendService } from 'src/app/service/friend.service';
 import { GamelistService } from 'src/app/service/gamelist.service';
+import { UserService } from 'src/app/service/user.service';
+import { Game } from 'src/app/class/game';
 
 @Component({
   selector: 'app-friends-list',
@@ -18,7 +20,7 @@ export class FriendsListComponent implements OnInit {
   @Input() friends: FriendSummary[];
   sortedFriends: FriendSummary[];
 
-  constructor(private playerService: PlayerService, private friendService: FriendService, private gamelistService: GamelistService) {
+  constructor(private playerService: PlayerService, private friendService: FriendService, private gamelistService: GamelistService, private userService: UserService) {
   }
 
   ngOnInit() {
@@ -57,21 +59,23 @@ export class FriendsListComponent implements OnInit {
     let mainGames = [];
     let friendGames = [];
 
-    await this.playerService.getOwnedGames(player.steamid).subscribe((response: OwnedGamesResponse) => {
-      console.log(response.games.length);
-      this.gamelistService.setGameList(response.games);
-      mainGames = response.games.slice();
-    }, (error) => {
-      console.log("Error getting games", error);
+    const user = this.userService.getPlayer();
+    mainGames = (await this.playerService.getOwnedGames(user.steamid).toPromise()).games;
+    friendGames = (await this.playerService.getOwnedGames(player.steamid).toPromise()).games;
+
+    const tempMainGames = [];
+    const tempFriendGames = [];
+    mainGames.forEach((mg: Game) => {
+      friendGames.forEach((fg: Game) => {
+        if(mg.appid === fg.appid) {
+          tempMainGames.push(mg);
+          tempFriendGames.push(fg);
+        }
+      });
     });
 
-    await this.playerService.getOwnedGames(player.steamid).subscribe((response: OwnedGamesResponse) => {
-      console.log(response.games.length);
-      this.gamelistService.setGameList(response.games);
-      friendGames = response.games.slice();
-    }, (error) => {
-      console.log("Error getting games", error);
-    });
+    this.gamelistService.setMainGameList(tempMainGames);
+    this.gamelistService.setGameList(tempFriendGames);
   }
 }
 
