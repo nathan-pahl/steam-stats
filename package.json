@@ -26,7 +26,7 @@
     "core-js": "^3.6.5",
     "hammerjs": "^2.0.8",
     "rxjs": "^6.5.5",
-    "tslib": "^2.0.0",
+    "tslib": "2.0.0",
     "zone.js": "^0.9.1"
   },
   "devDependencies": {
@@ -54,6 +54,6 @@
     "webpack": "^4.43.0"
   },
   "peerDependencies": {
-    "typescript": "3.9.2"
+    "typescript": "3.7.0"
   }
 }
